@@ -33,17 +33,22 @@ public class MthUtile001TestDataDriven {
     //Trong MathUtile001 nay su dung mng 2 chieu: vi can co (dauvao, dau ra) nhiu cap nhu the
     
     @Parameterized.Parameters //bo data
-     public static Object[][] intiData(){
+     public static Object[][] intiData(){//mảng 2 chiều này phải là static. 
          return new Integer[][]{{1,0},{1,1},{2,2},{6,3},{24,4},{120,5},{720,6}};
      }
+     //mỗi dòng trong bộ dât ứng với 2 ý nghĩa
+     //ví dụ cột0; là expected value, giá trị mà hàm phải return
+     //ví dụ cột1; ;là input cho hàm getFactorial()
+     //=>extract data sẽ thả vào biến -> biến đưa cho các hàm.
      
-     @Parameterized.Parameter(value=0)
+     //quy ước là public, non-static(vùng tham gia riêng được thả vào nên là non -static)
+     @Parameterized.Parameter(value=0)//ứng với cột 1;
      public long expected; //luu gia tri kivong
-     @Parameterized.Parameter(value=1)
+     @Parameterized.Parameter(value=1)//ứng với cột 0
      public int n;//luu gia tri dua vao ham getFactorial() check;
      
      //TestTime
-      @Test 
+      @Test //tự loop qua các bộ dât trong hàm intiData()
       public void testParameterGivenRightArgumentReturnWell(){
           assertEquals(expected, MathUtile001.getFactorial(n));
       }
